@@ -1,0 +1,134 @@
+[
+	(
+		<tags in json format>,
+		<osm id>,
+		<boundingbox bbox>,
+		<geometry in json format>
+	(
+		{'name': 'Schützenpark', 'type': 'multipolygon', 'leisure': 'park', 'wikidata': 'Q60650555'},
+		-100000000001328243,
+		[Decimal('10.1110576'), Decimal('54.3159559'), Decimal('10.1253175'), Decimal('54.3213565')],
+		{'type': 'Point', 'coordinates': [10.1176016626794, 54.3186422013909]}
+	),
+	(
+		{'leisure': 'park'},
+		-12146924,
+		[Decimal('10.1354443'), Decimal('54.3302805'), Decimal('10.1378233'), Decimal('54.3320322')],
+		{'type': 'Point', 'coordinates': [10.1363527558576, 54.3312943099205]}
+	),
+	(
+		{'name': 'Lessingplatz', 'leisure': 'park', 'name:etymology:wikidata': 'Q34628'},
+		-12326480,
+		[Decimal('10.1276286'), Decimal('54.3283186'), Decimal('10.1283717'), Decimal('54.3286506')],
+		{'type': 'Point', 'coordinates': [10.12799830873, 54.3284902802813]}
+	),
+	(
+		{'name': 'Schräger-Funken-Park', 'leisure': 'park'},
+		-12326380,
+		[Decimal('10.1285902'), Decimal('54.3281705'), Decimal('10.1290694'), Decimal('54.3287555')],
+		{'type': 'Point', 'coordinates': [10.1288463264305, 54.3284538267065]}
+	),
+	(
+		{'name': 'Schrevenpark', 'leisure': 'park', 'wikidata': 'Q55015173', 'wikipedia': 'de:Schrevenpark', 'old_name:1901-1947': 'Hohenzollernpark'},
+		-12310641,
+		[Decimal('10.1210295'), Decimal('54.3256686'), Decimal('10.1264139'), Decimal('54.3308299')],
+		{'type': 'Point', 'coordinates': [10.1238297130332, 54.3280111478248]}
+	),
+	(
+		{'name': 'Hiroshimapark', 'leisure': 'park', 'name:tr': 'Hiroşima Parkı', 'wikidata': 'Q60587537'},
+		-13858861,
+		[Decimal('10.1310508'), Decimal('54.3233280'), Decimal('10.1338274'), Decimal('54.3250378')],
+		{'type': 'Point', 'coordinates': [10.1324098781093, 54.3241295106096]}
+	),
+	(
+		{'leisure': 'park'},
+		-18900545,
+		[Decimal('10.1313301'), Decimal('54.3298356'), Decimal('10.1320018'), Decimal('54.3300989')],
+		{'type': 'Point', 'coordinates': [10.1317137808686, 54.3299646812678]}
+	),
+	(
+		{'name': 'Rosemarie-Kilian-Park', 'leisure': 'park'},
+		-18900619,
+		[Decimal('10.1290474'), Decimal('54.3289899'), Decimal('10.1314044'), Decimal('54.3299152')],
+		{'type': 'Point', 'coordinates': [10.1302011868623, 54.3294734412729]}
+	),
+	(
+		{'leisure': 'park'},
+		-18900516,
+		[Decimal('10.1324832'), Decimal('54.3297780'), Decimal('10.1353281'), Decimal('54.3307041')],
+		{'type': 'Point', 'coordinates': [10.1338913405385, 54.3302974607798]},
+	),
+(
+		{'name': 'Werftpark', 'leisure': 'park', 'alt_name': 'Volkspark', 'wikidata': 'Q60781462'},
+		-24300751,
+		[Decimal('10.1528253'), Decimal('54.3131022'), Decimal('10.1613726'), Decimal('54.3165837')],
+		{'type': 'Point', 'coordinates': [10.1576376331954, 54.3146629281415]},
+	),
+(
+		{'name': 'Alter Botanischer Garten', 'leisure': 'park', 'wikidata': 'Q437788', 'wikipedia': 'de:Alter Botanischer Garten (Kiel)', 'wikipedia:en': 'Alter_Botanischer_Garten_Kiel'},
+		-25838125,
+		[Decimal('10.1456266'), Decimal('54.3288134'), Decimal('10.1483134'), Decimal('54.3314202')],
+		{'type': 'Point', 'coordinates': [10.1468716028786, 54.3303917924388]},
+	),
+(
+		{'leisure': 'park'},
+		-27005191,
+		[Decimal('10.1327380'), Decimal('54.3228967'), Decimal('10.1402992'), Decimal('54.3266264')],
+		{'type': 'Point', 'coordinates': [10.1361867757467, 54.3251125391484]},
+	),
+(
+		{'name': 'Schlossgarten', 'leisure': 'park', 'wikidata': 'Q60637807'},
+		-28081091,
+		[Decimal('10.1436237'), Decimal('54.3254666'), Decimal('10.1461925'), Decimal('54.3283100')],
+		{'type': 'Point', 'coordinates': [10.1447250486644, 54.3270380164885]},
+	),
+(
+		{'leisure': 'park'},
+		-33305894,
+		[Decimal('10.1487019'), Decimal('54.3300531'), Decimal('10.1523358'), Decimal('54.3336008')],
+		{'type': 'Point', 'coordinates': [10.15040143758, 54.331833719498]},
+	),
+(
+		{'name': 'Ratsdienergarten', 'leisure': 'park', 'wikidata': 'Q60587539'},
+		-121419562,
+		[Decimal('10.1393224'), Decimal('54.3249812'), Decimal('10.1429087'), Decimal('54.3266975')],
+		{'type': 'Point', 'coordinates': [10.1411521952932, 54.3259174572735]},
+	),
+(
+		{'name': 'Prinzengarten', 'leisure': 'park'},
+		-150282549,
+		[Decimal('10.1427641'), Decimal('54.3240141'), Decimal('10.1443083'), Decimal('54.3254640')],
+		{'type': 'Point', 'coordinates': [10.1436743851195, 54.3248904503896]},
+	),
+(
+		{'leisure': 'park'},
+		-186837075,
+		[Decimal('10.1280816'), Decimal('54.3219891'), Decimal('10.1287540'), Decimal('54.3224254')],
+		{'type': 'Point', 'coordinates': [10.1284013822629, 54.3222156890405]},
+	),
+(
+		{'leisure': 'park'},
+		-186837076,
+		[Decimal('10.1293393'), Decimal('54.3228310'), Decimal('10.1310762'), Decimal('54.3238799')],
+		{'type': 'Point', 'coordinates': [10.1302201780122, 54.3233445529354]},
+	),
+(
+		{'leisure': 'park'},
+		-376174301,
+		[Decimal('10.1418280'), Decimal('54.3145990'), Decimal('10.1495197'), Decimal('54.3173094')],
+		{'type': 'Point', 'coordinates': [10.1448138678986, 54.3161425444553]},
+	),
+(
+		{'leisure': 'park'},
+		-478359752,
+		[Decimal('10.1286991'), Decimal('54.3224220'), Decimal('10.1294921'), Decimal('54.3229079')],
+		{'type': 'Point', 'coordinates': [10.1290960033344, 54.3226645701226]},
+	),
+(
+		{'leisure': 'park', 'description': 'Stufenanlage'},
+		-520405270,
+		[Decimal('10.1378997'), Decimal('54.3213137'), Decimal('10.1395312'), Decimal('54.3215694')],
+		{'type': 'Point', 'coordinates': [10.1387443672381, 54.3214358171762]}
+	)
+]
+

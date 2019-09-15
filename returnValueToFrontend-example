@@ -1,0 +1,107 @@
+{
+	"0":
+		{"tags": {"name": "Schützenpark", "type": "multipolygon", "leisure": "park", "wikidata": "Q60650555"},
+		"osm_id": -100000000001328243,
+		"geometry": {"type": "Point", "coordinates": [10.1176016626794, 54.3186422013909]}
+		},
+	"1":
+		{"tags": {"leisure": "park"},
+		"osm_id": -12146924,
+		"geometry": {"type": "Point", "coordinates": [10.1363527558576, 54.3312943099205]}
+		},
+	"2":
+		{"tags": {"name": "Lessingplatz", "leisure": "park", "name:etymology:wikidata": "Q34628"},
+		"osm_id": -12326480, 
+		"geometry": {"type": "Point", "coordinates": [10.12799830873, 54.3284902802813]}
+		},
+	"3":
+		{"tags": {"name": "Schräger-Funken-Park", "leisure": "park"},
+		"osm_id": -12326380, 
+		"geometry": {"type": "Point", "coordinates": [10.1288463264305, 54.3284538267065]}
+		},
+	"4":
+		{"tags": {"name": "Schrevenpark", "leisure": "park", "wikidata": "Q55015173", "wikipedia": "de:Schrevenpark", "old_name:1901-1947": "Hohenzollernpark"},
+		"osm_id": -12310641, 
+		"geometry": {"type": "Point", "coordinates": [10.1238297130332, 54.3280111478248]}
+		},
+	"5":
+		{"tags": {"name": "Hiroshimapark", "leisure": "park", "name:tr": "Hiroşima Parkı", "wikidata": "Q60587537"},
+		"osm_id": -13858861, 
+		"geometry": {"type": "Point", "coordinates": [10.1324098781093, 54.3241295106096]}
+		},
+	"6":
+		{"tags": {"leisure": "park"},
+		"osm_id": -18900545, 
+		"geometry": {"type": "Point", "coordinates": [10.1317137808686, 54.3299646812678]}
+		},
+	"7":
+		{"tags": {"name": "Rosemarie-Kilian-Park", "leisure": "park"},
+		"osm_id": -18900619, 
+		"geometry": {"type": "Point", "coordinates": [10.1302011868623, 54.3294734412729]}
+		},
+	"8":
+		{"tags": {"leisure": "park"},
+		"osm_id": -18900516, 
+		"geometry": {"type": "Point", "coordinates": [10.1338913405385, 54.3302974607798]}
+		},
+	"9":
+		{"tags": {"name": "Werftpark", "leisure": "park", "alt_name": "Volkspark", "wikidata": "Q60781462"},
+		"osm_id": -24300751, 
+		"geometry": {"type": "Point", "coordinates": [10.1576376331954, 54.3146629281415]}
+		},
+	"10":
+		{"tags": {"name": "Alter Botanischer Garten", "leisure": "park", "wikidata": "Q437788", "wikipedia": "de:Alter Botanischer Garten (Kiel)", "wikipedia:en": "Alter_Botanischer_Garten_Kiel"},
+		"osm_id": -25838125, 
+		"geometry": {"type": "Point", "coordinates": [10.1468716028786, 54.3303917924388]}
+		},
+	"11":
+		{"tags": {"leisure": "park"},
+		"osm_id": -27005191, 
+		"geometry": {"type": "Point", "coordinates": [10.1361867757467, 54.3251125391484]}
+		},
+	"12":
+		{"tags": {"name": "Schlossgarten", "leisure": "park", "wikidata": "Q60637807"},
+		"osm_id": -28081091, 
+		"geometry": {"type": "Point", "coordinates": [10.1447250486644, 54.3270380164885]}
+		},
+	"13":
+		{"tags": {"leisure": "park"},
+		"osm_id": -33305894, 
+		"geometry": {"type": "Point", "coordinates": [10.15040143758, 54.331833719498]}
+		},
+	"14":
+		{"tags": {"name": "Ratsdienergarten", "leisure": "park", "wikidata": "Q60587539"},
+		"osm_id": -121419562, 
+		"geometry": {"type": "Point", "coordinates": [10.1411521952932, 54.3259174572735]}
+		},
+	"15":
+		{"tags": {"name": "Prinzengarten", "leisure": "park"},
+		"osm_id": -150282549, 
+		"geometry": {"type": "Point", "coordinates": [10.1436743851195, 54.3248904503896]}
+		},
+	"16":
+		{"tags": {"leisure": "park"},
+		"osm_id": -186837075, 
+		"geometry": {"type": "Point", "coordinates": [10.1284013822629, 54.3222156890405]}
+		},
+	"17":
+		{"tags": {"leisure": "park"},
+		"osm_id": -186837076, 
+		"geometry": {"type": "Point", "coordinates": [10.1302201780122, 54.3233445529354]}
+		},
+	"18":
+		{"tags": {"leisure": "park"},
+		"osm_id": -376174301, 
+		"geometry": {"type": "Point", "coordinates": [10.1448138678986, 54.3161425444553]}
+		},
+	"19":
+		{"tags": {"leisure": "park"},
+		"osm_id": -478359752, 
+		"geometry": {"type": "Point", "coordinates": [10.1290960033344, 54.3226645701226]}
+		},
+	"20":
+		{"tags": {"leisure": "park", "description": "Stufenanlage"},
+		"osm_id": -520405270, 
+		"geometry": {"type": "Point", "coordinates": [10.1387443672381, 54.3214358171762]}
+		}
+}
