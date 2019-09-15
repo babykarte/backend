@@ -58,77 +58,76 @@
 		[Decimal('10.1324832'), Decimal('54.3297780'), Decimal('10.1353281'), Decimal('54.3307041')],
 		{'type': 'Point', 'coordinates': [10.1338913405385, 54.3302974607798]},
 	),
-(
+	(
 		{'name': 'Werftpark', 'leisure': 'park', 'alt_name': 'Volkspark', 'wikidata': 'Q60781462'},
 		-24300751,
 		[Decimal('10.1528253'), Decimal('54.3131022'), Decimal('10.1613726'), Decimal('54.3165837')],
 		{'type': 'Point', 'coordinates': [10.1576376331954, 54.3146629281415]},
 	),
-(
+	(
 		{'name': 'Alter Botanischer Garten', 'leisure': 'park', 'wikidata': 'Q437788', 'wikipedia': 'de:Alter Botanischer Garten (Kiel)', 'wikipedia:en': 'Alter_Botanischer_Garten_Kiel'},
 		-25838125,
 		[Decimal('10.1456266'), Decimal('54.3288134'), Decimal('10.1483134'), Decimal('54.3314202')],
 		{'type': 'Point', 'coordinates': [10.1468716028786, 54.3303917924388]},
 	),
-(
+	(
 		{'leisure': 'park'},
 		-27005191,
 		[Decimal('10.1327380'), Decimal('54.3228967'), Decimal('10.1402992'), Decimal('54.3266264')],
 		{'type': 'Point', 'coordinates': [10.1361867757467, 54.3251125391484]},
 	),
-(
+	(
 		{'name': 'Schlossgarten', 'leisure': 'park', 'wikidata': 'Q60637807'},
 		-28081091,
 		[Decimal('10.1436237'), Decimal('54.3254666'), Decimal('10.1461925'), Decimal('54.3283100')],
 		{'type': 'Point', 'coordinates': [10.1447250486644, 54.3270380164885]},
 	),
-(
+	(
 		{'leisure': 'park'},
 		-33305894,
 		[Decimal('10.1487019'), Decimal('54.3300531'), Decimal('10.1523358'), Decimal('54.3336008')],
 		{'type': 'Point', 'coordinates': [10.15040143758, 54.331833719498]},
 	),
-(
+	(
 		{'name': 'Ratsdienergarten', 'leisure': 'park', 'wikidata': 'Q60587539'},
 		-121419562,
 		[Decimal('10.1393224'), Decimal('54.3249812'), Decimal('10.1429087'), Decimal('54.3266975')],
 		{'type': 'Point', 'coordinates': [10.1411521952932, 54.3259174572735]},
 	),
-(
+	(
 		{'name': 'Prinzengarten', 'leisure': 'park'},
 		-150282549,
 		[Decimal('10.1427641'), Decimal('54.3240141'), Decimal('10.1443083'), Decimal('54.3254640')],
 		{'type': 'Point', 'coordinates': [10.1436743851195, 54.3248904503896]},
 	),
-(
+	(
 		{'leisure': 'park'},
 		-186837075,
 		[Decimal('10.1280816'), Decimal('54.3219891'), Decimal('10.1287540'), Decimal('54.3224254')],
 		{'type': 'Point', 'coordinates': [10.1284013822629, 54.3222156890405]},
 	),
-(
+	(
 		{'leisure': 'park'},
 		-186837076,
 		[Decimal('10.1293393'), Decimal('54.3228310'), Decimal('10.1310762'), Decimal('54.3238799')],
 		{'type': 'Point', 'coordinates': [10.1302201780122, 54.3233445529354]},
 	),
-(
+	(
 		{'leisure': 'park'},
 		-376174301,
 		[Decimal('10.1418280'), Decimal('54.3145990'), Decimal('10.1495197'), Decimal('54.3173094')],
 		{'type': 'Point', 'coordinates': [10.1448138678986, 54.3161425444553]},
 	),
-(
+	(
 		{'leisure': 'park'},
 		-478359752,
 		[Decimal('10.1286991'), Decimal('54.3224220'), Decimal('10.1294921'), Decimal('54.3229079')],
 		{'type': 'Point', 'coordinates': [10.1290960033344, 54.3226645701226]},
 	),
-(
+	(
 		{'leisure': 'park', 'description': 'Stufenanlage'},
 		-520405270,
 		[Decimal('10.1378997'), Decimal('54.3213137'), Decimal('10.1395312'), Decimal('54.3215694')],
 		{'type': 'Point', 'coordinates': [10.1387443672381, 54.3214358171762]}
 	)
 ]
-
