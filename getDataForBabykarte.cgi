@@ -7,7 +7,7 @@ data = {}
 elem_count = 0
 dbconnstr="dbname=gis"
 sqls = {"normal": "SELECT to_json(tags), osm_id, 'Node' AS osm_type, St_asgeojson(St_centroid(geom)) ::json AS geometry FROM osm_poi_point WHERE geom && ST_makeEnvelope(%lat1, %lon1, %lat2, %lon2) and %condition UNION ALL SELECT to_json(tags), osm_id, 'Way' AS osm_type, st_asgeojson(St_centroid(geom)) ::json AS geometry FROM osm_poi_poly WHERE geom && ST_makeEnvelope(%lat1, %lon1, %lat2, %lon2) and %condition;",
-			"playground": "SELECT to_json(tags), osm_id, CASE WHEN equipment IS NOT NULL THEN 'Way' ELSE 'Node' END AS osm_type, St_asgeojson(St_centroid(geom)) ::json AS geometry, equipment from playgrounds where geom && ST_makeEnvelope(%lat1, %lon1, %lat2, %lon2) and %condition;"}
+			"playground": "SELECT to_json(tags), osm_id, CASE WHEN equipment IS NOT NULL THEN 'Way' ELSE 'Node' END AS osm_type, St_asgeojson(St_centroid(geom)) ::json AS geometry, equipment from osm_poi_playgrounds where geom && ST_makeEnvelope(%lat1, %lon1, %lat2, %lon2) and %condition;"}
 queryLookUp = {"paediatrics": ("tags->'healthcare:speciality'='paediatrics'", "normal", "health"),
 				"midwife": ("tags->'healthcare'='midwife'", "normal", "health"),
 				"birthing_center": ("tags->'healthcare'='birthing_center'", "normal", "health"),
@@ -49,7 +49,14 @@ def convertToJSON(query, mode, name, category, source):
 def lookupQuery(name, bbox):
 	if name in queryLookUp:
 		condition, mode, category = queryLookUp[name]
-		return sqls[mode].replace("%lon1", str(bbox[0])).replace("%lat1", str(bbox[1])).replace("%lon2", str(bbox[2])).replace("%lat2", str(bbox[3])).replace("%condition", condition), mode, name, category
+		try:
+			bbox[0] = str(int(bbox[0]))
+			bbox[1] = str(int(bbox[1]))
+			bbox[2] = str(int(bbox[2]))
+			bbox[3] = str(int(bbox[3]))
+		except:
+			return errorCreation("Don't be evil!")
+		return sqls[mode].replace("%lon1", bbox[0]).replace("%lat1", bbox[1]).replace("%lon2", bbox[2]).replace("%lat2", bbox[3]).replace("%condition", condition), mode, name, category
 def getData():
 	if debug == "":
 		filebuffer = sys.stdin.read()
