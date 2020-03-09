@@ -7,9 +7,13 @@ verbose = False
 data = {}
 elem_count = 0
 dbconnstr="dbname=poi"
-sqls = {"normal": "SELECT to_json(tags), osm_id, St_asgeojson(St_centroid(geom)) ::json AS geometry FROM osm_poi_all WHERE geom && ST_makeEnvelope(%lat1, %lon1, %lat2, %lon2) and (%condition);",
-			"playground": "SELECT to_json(tags), osm_id, osm_type, St_asgeojson(St_centroid(geom)) ::json AS geometry, equipment from osm_poi_playgrounds where geom && ST_makeEnvelope(%lat1, %lon1, %lat2, %lon2) and (%condition);"}
-queryLookUp = {"paediatrics": ("tags->'healthcare:speciality' LIKE 'paediatrics'", "normal", "health"),
+sqls = {"normal": "SELECT to_json(tags), osm_id, St_asgeojson(St_centroid(geom)) ::json AS geometry FROM osm_poi_all WHERE %s",
+		"playground": "SELECT to_json(tags), osm_id, osm_type, St_asgeojson(St_centroid(geom)) ::json AS geometry, equipment FROM osm_poi_playgrounds WHERE %s",
+		"singlenode": "SELECT to_json(tags), osm_id, ST_asgeojson(ST_centroid(geom)) ::json AS geometry FROM osm_poi_point WHERE osm_id=%id",
+		"singleway": "SELECT to_json(tags), osm_id, ST_asgeojson(ST_centroid(geom)) ::json AS geometry FROM osm_poi_poly WHERE osm_id=%id",
+		"advancedSearch": "SELECT to_json(tags), osm_id, St_asgeojson(St_centroid(geom)) ::json AS geometry FROM osm_poi_all WHERE %s"}
+queryLookUp = { "bbox": ("geom && ST_makeEnvelope(%lat1, %lon1, %lat2, %lon2)", "normal", ""),
+				"paediatrics": ("tags->'healthcare:speciality' LIKE 'paediatrics'", "normal", "health"),
 				"midwife": ("tags->'healthcare'='midwife'", "normal", "health"),
 				"birthing_center": ("tags->'healthcare'='birthing_center'", "normal", "health"),
 				"playground": ("tags->'leisure'='playground' AND (CASE WHEN tags->'min_age' IS NOT NULL THEN tags->'min_age'>='3' ELSE TRUE END) AND NOT (CASE WHEN tags->'access' IS NOT NULL THEN tags->'access'='private' ELSE FALSE END)", "playground", "activity"),
@@ -22,10 +26,16 @@ queryLookUp = {"paediatrics": ("tags->'healthcare:speciality' LIKE 'paediatrics'
 				"zoo": ("tags->'tourism'='zoo'", "normal", "activity"),
 				"changingtable": ("(tags->'diaper' IS NOT NULL AND tags->'diaper'!='no') OR (tags->'changing_table' IS NOT NULL AND tags->'changing_table'!='no')", "normal", "changingtable"),
 				"changingtable-men": ("tags->'diaper:male'='yes' OR tags->'diaper:unisex'='yes' OR tags->'diaper'='room' OR tags->'diaper:wheelchair'='yes' OR tags->'changing_table:location' NOT LIKE 'female_toilet'", "normal", "changingtable"),
+				"highcair": ("tags->'highcair'='yes' OR tags->'highchair'>'0'", "normal", ""),
+				"stroller": ("tags->'stroller'='yes' OR tags->'stroller'='limited'", "normal", ""),
+				"kidsarea": ("tags->'kids_area'='yes'", "normal", ""),
 				"cafe": ("tags->'amenity'='cafe' AND (CASE WHEN tags->'min_age' IS NOT NULL THEN tags->'min_age'>='3' ELSE TRUE END) OR tags ? 'cafe' AND (CASE WHEN tags->'min_age' IS NOT NULL THEN tags->'min_age'>='3' ELSE TRUE END)", "normal", "eat"),
 				"restaurant": ("tags->'amenity'='restaurant' AND (CASE WHEN tags->'min_age' IS NOT NULL THEN tags->'min_age'>='3' ELSE TRUE END)", "normal", "eat"),
 				"fast_food": ("tags->'amenity'='fast_food'", "normal", "eat"),
+				"directname": ("tags->'name' IS LIKE '%s'"),
+				"singlepoi": ("osm_id=%s")
 			}
+
 def errorCreation(name, text):
 	global data, elem_count
 	data[elem_count] = {}
@@ -36,7 +46,7 @@ def errorLog(message):
 	global debug
 	if not debug == "":
 		print(message, file=sys.stderr)
-def convertToJSON(query, mode, name, category, source):
+def convertToJSON(query, mode, name, subcategory, source):
 	global data, elem_count
 	for row in query:
 		data[elem_count] = {}
@@ -54,29 +64,57 @@ def convertToJSON(query, mode, name, category, source):
 				data[elem_count]["type"] = "Way"
 			if int(data[elem_count]["osm_id"]) >= 1: ##True when object is a node
 				data[elem_count]["type"] = "Node"
-		data[elem_count]["category"] = category
+		data[elem_count]["category"] = subcategory #Delete this line when the new version of Babykarte gets released.
+		data[elem_count]["subcategory"] = subcategory
 		data[elem_count]["filter"] = name
-		#data[elem_count]["osm_id"] = int(str(data[elem_count]["osm_id"]).replace("-", ""))
-		data[elem_count]["osm_id"] = int(data[elem_count]["osm_id"])
+		data[elem_count]["osm_id"] = int(str(data[elem_count]["osm_id"]).replace("-", ""))
+		#data[elem_count]["osm_id"] = int(data[elem_count]["osm_id"])
 		elem_count += 1
 	if len(data) == 0:
 		data[elem_count] = {}
 		data[elem_count]["notes"] = "No Data"
 		data[elem_count]["filter"] = name
-def lookupQuery(name, bbox):
-	if name in queryLookUp:
-		condition, mode, category = queryLookUp[name]
-		try:
-			bbox[0] = str(float(bbox[0]))
-			bbox[1] = str(float(bbox[1]))
-			bbox[2] = str(float(bbox[2]))
-			bbox[3] = str(float(bbox[3]))
-		except:
-			bbox[0] = 0
-			bbox[1] = 0
-			bbox[2] = 0
-			bbox[3] = 0
-		return sqls[mode].replace("%lon1", bbox[0]).replace("%lat1", bbox[1]).replace("%lon2", bbox[2]).replace("%lat2", bbox[3]).replace("%condition", condition), mode, name, category
+def createBboxQuery(bbox):
+	bbox[0] = str(float(bbox[0]))
+	bbox[1] = str(float(bbox[1]))
+	bbox[2] = str(float(bbox[2]))
+	bbox[3] = str(float(bbox[3]))
+	return queryLookUp["bbox"][0].replace("%lon1", bbox[0]).replace("%lat1", bbox[1]).replace("%lon2", bbox[2]).replace("%lat2", bbox[3])
+def createFltrQuery(fltrs):
+	output = []
+	for fltr in fltrs.split(","):
+		output.append(queryLookUp[fltr])
+	return " AND ".join(output)
+def anotherLookup(entry):
+	if entry.startswith("id="):
+		entry = entry.split("=")[1]
+		osm_type = list(entry)[0]
+		osm_id = entry.replace(osm_type, "")
+		osm_type = osm_type.upper()
+		if osm_type == "N":
+			return sqls["singlenode"].replace("%id", osm_id), "singlenode", str(osm_type) + str(osm_id), "None"
+		elif osm_type == "W":
+			return sqls["singleway"].replace("%id", "-" + osm_id), "singleway", str(osm_type) + str(osm_id), "None"
+		elif osm_type == "R":
+			return sqls["singleway"].replace("%id", -1*(osm_id+1e17)), "singleway", str(osm_type) + str(osm_id), "None"
+	elif entry.find(" | ") > -1:
+		sql = sqls["advancedSearch"]
+		args = []
+		name, subcategory, fltr, bbox = entry.find(" | ")
+		if name == "":
+			args.append(createBboxQuery(bbox))
+		args.append(queryLookUp[subcategory])
+		if not fltr == "":
+			args.append(createFltrQuery(fltr))
+		sql = sql + " AND ".join(args)
+		return sql, "advancedSearch", "None", "None"
+def lookupQuery(name, bbox=None):
+	if name in queryLookUp: 
+		condition, mode, subcategory = queryLookUp[name]
+		if not bbox == None:
+			query = sqls[mode]
+			return query.replace("%s", createBboxQuery(bbox)) + " AND (" + condition + ")", mode, name, subcategory
+			#return sqls[mode].replace("%lon1", bbox[0]).replace("%lat1", bbox[1]).replace("%lon2", bbox[2]).replace("%lat2", bbox[3]).replace("%condition", condition), mode, name, subcategory
 	else:
 		return "", "", name, "" 
 def getData():
@@ -87,17 +125,20 @@ def getData():
 	for entry in filebuffer.split("\n"):
 		if entry == "":
 			continue
-		query, bbox = entry.split(" - ")
-		query, mode, name, category = lookupQuery(query.strip(), bbox.split(","))
+		if entry.find(" - ") > -1:
+			query, bbox = entry.split(" - ")
+			query, mode, name, subcategory = lookupQuery(query.strip(), bbox.split(","))
+		else:
+			query, mode, name, subcategory = anotherLookup(entry)
 		if query == "":
-			errorCreation(name, "ERROR 404")
+			errorCreation(name, "No Data")
 		else:
 			try:
 				conn = psycopg2.connect(dbconnstr)
 				cur = conn.cursor()
 				cur.execute(query)
 				result = cur.fetchall()
-				convertToJSON(result, mode, name, category, query);
+				convertToJSON(result, mode, name, subcategory, query);
 			except Exception as e:
 				if not debug == "" or verbose:
 					errorCreation(name, "ERROR 503" + str(e))
