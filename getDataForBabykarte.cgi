@@ -11,7 +11,7 @@ sqls = {"normal": "SELECT to_json(tags), osm_id, St_asgeojson(St_centroid(geom))
 		"playground": "SELECT to_json(tags), osm_id, osm_type, St_asgeojson(St_centroid(geom)) ::json AS geometry, equipment FROM osm_poi_playgrounds WHERE %s",
 		"singlenode": "SELECT to_json(tags), osm_id, ST_asgeojson(ST_centroid(geom)) ::json AS geometry FROM osm_poi_point WHERE osm_id=%id",
 		"singleway": "SELECT to_json(tags), osm_id, ST_asgeojson(ST_centroid(geom)) ::json AS geometry FROM osm_poi_poly WHERE osm_id=%id",
-		"advancedSearch": "SELECT to_json(tags), osm_id, St_asgeojson(St_centroid(geom)) ::json AS geometry FROM osm_poi_all WHERE %s"}
+		"advancedSearch": "SELECT to_json(tags), osm_id, St_asgeojson(St_centroid(geom)) ::json AS geometry FROM osm_poi_all WHERE "}
 queryLookUp = { "bbox": ("geom && ST_makeEnvelope(%lat1, %lon1, %lat2, %lon2)", "normal", ""),
 				"paediatrics": ("tags->'healthcare:speciality' LIKE 'paediatrics'", "normal", "health"),
 				"midwife": ("tags->'healthcare'='midwife'", "normal", "health"),
@@ -32,7 +32,7 @@ queryLookUp = { "bbox": ("geom && ST_makeEnvelope(%lat1, %lon1, %lat2, %lon2)", 
 				"cafe": ("tags->'amenity'='cafe' AND (CASE WHEN tags->'min_age' IS NOT NULL THEN tags->'min_age'>='3' ELSE TRUE END) OR tags ? 'cafe' AND (CASE WHEN tags->'min_age' IS NOT NULL THEN tags->'min_age'>='3' ELSE TRUE END)", "normal", "eat"),
 				"restaurant": ("tags->'amenity'='restaurant' AND (CASE WHEN tags->'min_age' IS NOT NULL THEN tags->'min_age'>='3' ELSE TRUE END)", "normal", "eat"),
 				"fast_food": ("tags->'amenity'='fast_food'", "normal", "eat"),
-				"directname": ("tags->'name' IS LIKE '%s'"),
+				"directname": ("tags->'name' LIKE '%s'"),
 				"singlepoi": ("osm_id=%s")
 			}
 
@@ -80,6 +80,10 @@ def createBboxQuery(bbox):
 	bbox[2] = str(float(bbox[2]))
 	bbox[3] = str(float(bbox[3]))
 	return queryLookUp["bbox"][0].replace("%lon1", bbox[0]).replace("%lat1", bbox[1]).replace("%lon2", bbox[2]).replace("%lat2", bbox[3])
+def preventHack(inp):
+	for i in ["--", "/*", "*/", ";", "//"]:
+		inp = inp.replace(i, "")
+	return inp
 def createFltrQuery(fltrs):
 	output = []
 	for fltr in fltrs.split(","):
@@ -100,13 +104,19 @@ def anotherLookup(entry):
 	elif entry.find(" | ") > -1:
 		sql = sqls["advancedSearch"]
 		args = []
-		name, subcategory, fltr, bbox = entry.find(" | ")
+		print(entry, file=sys.stderr)
+		name, subcategory, fltr, bbox = entry.split(" | ")
 		if name == "":
-			args.append(createBboxQuery(bbox))
-		args.append(queryLookUp[subcategory])
+			args.append(createBboxQuery(bbox.split(",")))
+		else:
+			args.append(queryLookUp["directname"].replace("%s", preventHack(name)))
+		if not subcategory == "all":
+			args.append(queryLookUp[subcategory])
 		if not fltr == "":
 			args.append(createFltrQuery(fltr))
 		sql = sql + " AND ".join(args)
+		print(args, file=sys.stderr)
+		print(sql, file=sys.stderr)
 		return sql, "advancedSearch", "None", "None"
 def lookupQuery(name, bbox=None):
 	if name in queryLookUp: 
