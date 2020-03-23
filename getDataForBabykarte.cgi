@@ -104,7 +104,6 @@ def anotherLookup(entry):
 	elif entry.find(" | ") > -1:
 		sql = sqls["advancedSearch"]
 		args = []
-		print(entry, file=sys.stderr)
 		name, subcategory, fltr, bbox = entry.split(" | ")
 		if name == "":
 			args.append(createBboxQuery(bbox.split(",")))
@@ -115,8 +114,6 @@ def anotherLookup(entry):
 		if not fltr == "":
 			args.append(createFltrQuery(fltr))
 		sql = sql + " AND ".join(args)
-		print(args, file=sys.stderr)
-		print(sql, file=sys.stderr)
 		return sql, "advancedSearch", "None", "None"
 def lookupQuery(name, bbox=None):
 	if name in queryLookUp: 
